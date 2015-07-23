@@ -1,0 +1,26 @@
+journal	NGS_publications	Total_publications
+Inorg Chem	151	22177
+J Virol	151	21512
+Anticancer Res	132	11616
+Dalton Trans	101	14668
+Bioorg Med Chem Lett	89	18546
+Eur J Med Chem	86	6237
+PLoS One	85	131457
+J Org Chem	83	23526
+Bioorg Med Chem	74	10910
+J Am Chem Soc	68	43792
+J Med Chem	64	11637
+J Gen Virol	50	5598
+J Biol Chem	48	73493
+Chemistry	45	18897
+Virology	42	7543
+Org Lett	36	22386
+Proc Natl Acad Sci U S A	35	55987
+Acta Crystallogr Sect E Struct Rep Online	33	23618
+Nucleic Acids Res	33	17733
+Virus Res	33	3505
+J Phys Chem A	31	16776
+J Mol Biol	26	12463
+Molecules	25	6696
+J Chem Phys	24	30663
+Biochemistry	23	25037
