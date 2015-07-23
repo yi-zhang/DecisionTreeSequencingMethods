@@ -4,10 +4,10 @@ print("Start PubmedSearch")
 
     con <-file("sequencing_methods.csv")
     data <- read.csv(con)[,3]
-n=0
+n=12
 for (i in seq_along(data)) {
     n=n+1
-    print (paste('count', n, data[n]))
+    print (paste('count', i, data[n]))
     if (n<53) {
         pubmed_search<-dget("pubmed_search.R")
         pubmed_search(data[n])
