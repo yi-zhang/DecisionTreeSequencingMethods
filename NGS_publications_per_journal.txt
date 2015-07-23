@@ -1,0 +1,3 @@
+journal	NGS_publications	Total_publications
+Nat Methods	1	2602
+Nat Protoc	1	2098

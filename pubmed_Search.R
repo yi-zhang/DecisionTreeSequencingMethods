@@ -67,9 +67,13 @@ names(journal_ngs_total) <- c("journal","NGS_publications","Total_publications")
 
 write.table(journal_ngs_total,"NGS_publications_per_journal.txt",quote=F,sep="\t",row.names=F)
 pubs_per_journal <- read.table("NGS_publications_per_journal.txt",header = T,sep="\t")
-ggplot(pubs_per_journal,aes(journal,NGS_publications, fill=journal)) + geom_bar(stat="identity")+
+jp<-ggplot(pubs_per_journal,aes(journal,NGS_publications, fill=journal)) + geom_bar(stat="identity")+
     coord_flip()+
     theme(legend.position="none")
+
+# Filename for plot 
+journalplot= paste("SeqMeth_", query, '_journalplot', '.jpg', sep='')
+ggsave(journalplot, jp)
 print ("End of Pubmed Search")
 }
 
