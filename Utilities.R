@@ -8,7 +8,7 @@ n=0
 for (i in seq_along(data)) {
     n=n+1
     print (paste('count', i, data[n]))
-    if (n<20) {
+    if (n<3) {
         pubmed_search<-dget("pubmed_search.R")
         pubmed_search(data[n])
         #print (data[n])

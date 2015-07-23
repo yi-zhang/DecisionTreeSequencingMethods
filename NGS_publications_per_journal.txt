@@ -1,3 +1,20 @@
 journal	NGS_publications	Total_publications
-Nat Methods	1	2602
-Nat Protoc	1	2098
+Genome Biol	3	3440
+Methods Mol Biol	3	27839
+PLoS One	3	131457
+Bioinformatics	2	17423
+BMC Genomics	2	7908
+Methods	2	2564
+Nucleic Acids Res	2	17733
+PLoS Genet	2	5267
+Biotechniques	1	2920
+EMBO Rep	1	3591
+FEBS Lett	1	13893
+Gene	1	8460
+Genes Dev	1	4241
+J Biol Chem	1	73493
+Mol Cell	1	5433
+Mol Cell Biol	1	10084
+Nature	1	36970
+Proc Natl Acad Sci U S A	1	55987
+RNA Biol	1	1084
