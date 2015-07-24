@@ -3,13 +3,11 @@ library(RISmed)
 #library(Pubmed.mineR)
 library(ggplot2)
 print("Start Pubmed Search")
-print (paste('SearchExpression: ', SearchExpression))
+
 
 # Search tag: sequencing method
 query <- SearchExpression
-print (paste(query, "line 9"))
-
-print ("Start Retrieving Data")
+print (paste("Start Retrieving Data:",query))
 # Search Pubmed, retrieve complete record, subset record 
 ngs_search <- EUtilsSummary(query, type="esearch",db = "pubmed",mindate=2000, maxdate=2015, retmax=30000)
 QueryCount(ngs_search)
@@ -18,13 +16,14 @@ pubmed_data <- data.frame('PMID'=PMID(ngs_records), 'Citations'=Cited(ngs_record
 pubmed_data <- pubmed_data[order(-pubmed_data$YearPubmed, -pubmed_data$Citations),]
 print (paste("End Retrieving Data:", query))
 
+print("Preparing journal graphic")
 # Overview how many articles per year, no journal information
 years <- YearPubmed(ngs_records)
 ngs_pubs_count <- as.data.frame(table(years))
-
+print('Writing data into txt file')
 # Filename for search results, store search results
-filename= paste("SeqMeth_", query, '.csv', sep='')
-write.csv(pubmed_data,filename,quote=F,row.names=F)
+filename= paste("SeqMeth_", query, '.txt', sep='')
+write.table(pubmed_data,filename,quote=F,row.names=F, sep='\t')
 
 
 # Selecting total publications, no journal differentiation
@@ -50,7 +49,6 @@ if (nrow(ngs_journal_count) < 25) {
 }
 
 ngs_journal_count_top25 <- ngs_journal_count[order(-ngs_journal_count[,2]),][1:a,]
-
 journal_names <- paste(ngs_journal_count_top25$journal,"[jo]",sep="")
 
 total_journal<-vector(mode="integer", length=25)
@@ -65,9 +63,12 @@ journal_ngs_total <- cbind(ngs_journal_count_top25,total_journal)
 names(journal_ngs_total) <- c("journal","NGS_publications","Total_publications")
 #journal_ngs_total$NGS_publications_normalized <- journal_ngs_total$NGS_publications / journal_ngs_total$Total_publications
 
+
+print ("Writing graphic as jpb")
+xaxes<-paste('publication on', query)
 write.table(journal_ngs_total,"NGS_publications_per_journal.txt",quote=F,sep="\t",row.names=F)
 pubs_per_journal <- read.table("NGS_publications_per_journal.txt",header = T,sep="\t")
-jp<-ggplot(pubs_per_journal,aes(journal,NGS_publications, fill=journal)) + geom_bar(stat="identity")+
+jp<-ggplot(pubs_per_journal,aes(journal, NGS_publications, fill=journal)) + geom_bar(stat="identity")+
     coord_flip()+
     theme(legend.position="none")
 
