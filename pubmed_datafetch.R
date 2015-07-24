@@ -73,7 +73,7 @@ jp<-ggplot(pubs_per_journal,aes(journal, NGS_publications, fill=journal)) + geom
     theme(legend.position="none")
 
 
-# Filename for plot 
+# Save plot 
 journalplot= paste("SeqMeth_", query, '_journalplot', '.jpg', sep='')
 ggsave(journalplot, jp)
 print ("end of Pubmed search")
