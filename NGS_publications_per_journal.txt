@@ -1,0 +1,26 @@
+journal	NGS_publications	Total_publications
+Nucleic Acids Res	20	17733
+PLoS One	18	131457
+Methods Mol Biol	14	27839
+Methods	10	2564
+PLoS Genet	10	5267
+Genes Dev	7	4241
+Cold Spring Harb Protoc	6	1490
+Nat Protoc	6	2098
+J Virol	5	21512
+Nat Methods	5	2602
+Epigenetics Chromatin	4	197
+Genes Genet Syst	4	670
+Hum Mol Genet	4	6477
+Am J Hum Genet	3	3819
+Biochem Soc Trans	3	4700
+BMC Genomics	3	7908
+Curr Opin Cell Biol	3	1609
+Curr Protoc Mol Biol	3	559
+FEBS Lett	3	13893
+Genome	3	1871
+Genome Res	3	3345
+J Appl Genet	3	892
+J Cell Biochem	3	5685
+J Mol Biol	3	12463
+Methods Enzymol	3	6464
