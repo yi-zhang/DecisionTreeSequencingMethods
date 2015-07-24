@@ -1,13 +1,14 @@
 pubmed_search <- function(SearchExpression){
 library(RISmed)
-#library(Pubmed.mineR)
 library(ggplot2)
 print("start Pubmed search")
 
 # Search tag: sequencing method
 query <- SearchExpression
-print (paste("start retrieving data:",query))
+
+
 # Search Pubmed, retrieve complete record, subset record 
+print (paste("start retrieving data:",query))
 ngs_search <- EUtilsSummary(query, type="esearch",db = "pubmed",mindate=2000, maxdate=2015, retmax=30000)
 QueryCount(ngs_search)
 ngs_records <- EUtilsGet(ngs_search)
@@ -15,17 +16,18 @@ pubmed_data <- data.frame('PMID'=PMID(ngs_records), 'Citations'=Cited(ngs_record
 pubmed_data <- pubmed_data[order(-pubmed_data$YearPubmed, -pubmed_data$Citations),]
 print (paste("end retrieving data:", query))
 
-print("Preparing journal graphic")
+
 # Overview how many articles per year, no journal information
+print("Preparing journal graphic")
 years <- YearPubmed(ngs_records)
 ngs_pubs_count <- as.data.frame(table(years))
 print('writing data into txt file')
+
 # Filename for search results, store search results
 filename= paste("SeqMeth_", query, '.txt', sep='')
 write.table(pubmed_data,filename,quote=F,row.names=F, sep='\t')
 
-
-# Selecting total publications, no journal differentiation
+# Total publications, no journal differentiation
 total <- NULL
 for (i in 2000:2015){
     peryear <- EUtilsSummary("", type="esearch", db="pubmed", mindate=i, maxdate=i)
@@ -56,7 +58,6 @@ for (i in journal_names){
     perjournal <- EUtilsSummary(i, type='esearch', db='pubmed',mindate=2000, maxdate=2015)
     total_journal[i] <- QueryCount(perjournal)
 }
-
 journal_ngs_total <- cbind(ngs_journal_count_top25,total_journal)
 names(journal_ngs_total) <- c("journal","NGS_publications","Total_publications")
 #journal_ngs_total$NGS_publications_normalized <- journal_ngs_total$NGS_publications / journal_ngs_total$Total_publications
@@ -64,11 +65,13 @@ names(journal_ngs_total) <- c("journal","NGS_publications","Total_publications")
 
 print ("writing graphic as jpg")
 xaxes<-paste('publication on', query)
+########  Needs improvement !!!  awkward solution ####### Joerg, 7/24/2015
 write.table(journal_ngs_total,"NGS_publications_per_journal.txt",quote=F,sep="\t",row.names=F)
 pubs_per_journal <- read.table("NGS_publications_per_journal.txt",header = T,sep="\t")
 jp<-ggplot(pubs_per_journal,aes(journal, NGS_publications, fill=journal)) + geom_bar(stat="identity")+
     coord_flip()+
     theme(legend.position="none")
+
 
 # Filename for plot 
 journalplot= paste("SeqMeth_", query, '_journalplot', '.jpg', sep='')
