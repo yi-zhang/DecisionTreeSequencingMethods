@@ -1,6 +1,6 @@
 # This scripts reads search expression from the csv and calls pubmed_search function 
 library(RISmed)
-print("Start PubmedSearch")
+print("start Pubmed search")
     con <-file("sequencing_methods.csv")
     data <- read.csv(con)[,3]
 n=21
