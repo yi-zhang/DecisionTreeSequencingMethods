@@ -4,7 +4,7 @@ library(RISmed)
 library(ggplot2)
 print("Start Pubmed Search")
 
-
+SearchExpression="(PEAT AND (sequence OR sequencing))"
 # Search tag: sequencing method
 query <- SearchExpression
 print (paste("Start Retrieving Data:",query))

@@ -1,3 +1,26 @@
 journal	NGS_publications	Total_publications
-Biochem Soc Trans	1	4700
-Nat Protoc	1	2098
+Int J Syst Evol Microbiol	1688	7502
+Appl Environ Microbiol	903	15945
+PLoS One	396	131457
+Environ Microbiol	348	3581
+FEMS Microbiol Ecol	341	2768
+Microb Ecol	279	2211
+Antonie Van Leeuwenhoek	271	1957
+Appl Microbiol Biotechnol	251	8439
+J Bacteriol	222	13791
+FEMS Microbiol Lett	210	6629
+Genome Announc	178	2712
+Curr Microbiol	159	3059
+Proc Natl Acad Sci U S A	153	55987
+ISME J	146	1594
+Syst Appl Microbiol	146	1167
+Wei Sheng Wu Xue Bao	145	2858
+J Appl Microbiol	127	5301
+Mol Ecol	125	6105
+J Microbiol	118	1335
+World J Microbiol Biotechnol	115	1175
+Can J Microbiol	113	2126
+J Microbiol Biotechnol	110	2207
+BMC Genomics	102	7908
+J Microbiol Methods	101	3331
+Mycologia	101	1607
