@@ -1,7 +1,3 @@
 journal	NGS_publications	Total_publications
-Nat Biotechnol	2	6366
-Curr Protoc Mol Biol	1	559
-Genome Res	1	3345
-Nat Methods	1	2602
+Biochem Soc Trans	1	4700
 Nat Protoc	1	2098
-Sci Rep	1	11992

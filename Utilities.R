@@ -6,11 +6,11 @@ print("Start PubmedSearch")
 n=21
 for (i in seq_along(data)) {
     n=n+1
+    print (paste('id: ', n, 'query: ', (data[n])))
     #print (paste('count', i, data[n]))
-    if (n<31) {
+    if (n<24) {
         pubmed_search<-dget("pubmed_search.R")
-        pubmed_search(data[n])
-        print (paste('id: ', i, 'query: ', (data[n])))
+        pubmed_search(data[n]) 
     }
 }
 print("End Utilities")
