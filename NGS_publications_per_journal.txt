@@ -1,26 +1,7 @@
 journal	NGS_publications	Total_publications
-Nano Lett	26	9124
-ACS Nano	23	7689
-Nanotechnology	19	8950
-Biophys J	14	11675
-Nat Nanotechnol	12	1898
-Electrophoresis	10	7596
-Sci Rep	10	11992
-Nat Biotechnol	9	6366
-Nanoscale	8	6989
-Phys Life Rev	7	550
-J Am Chem Soc	6	43792
-J Chem Phys	6	30663
-Proc Natl Acad Sci U S A	6	55987
-J Phys Condens Matter	5	8274
-Anal Chem	4	19693
-Bioinformatics	4	17423
-Biomed Microdevices	4	1073
-BMC Bioinformatics	4	6830
-J Phys Chem B	4	22821
-Methods Mol Biol	4	27839
-Small	4	4332
-Angew Chem Int Ed Engl	3	26349
-Clin Chem	3	6139
-Curr Opin Biotechnol	3	1775
-J Nanosci Nanotechnol	3	11852
+Nat Biotechnol	2	6366
+Curr Protoc Mol Biol	1	559
+Genome Res	1	3345
+Nat Methods	1	2602
+Nat Protoc	1	2098
+Sci Rep	1	11992
