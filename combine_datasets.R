@@ -9,7 +9,7 @@ print ('start binding')
 for(i in seq_along(files)){
     print (paste('binding file', i))
     path<-paste('01_csv/', files[i], sep='')
-    data<-read.csv(path, header=T) # load the file
+    data<-read.csv2(path, header=T) # load the file
     mydata <-rbind(data, mydata)
 }
 print ('end binding file')
