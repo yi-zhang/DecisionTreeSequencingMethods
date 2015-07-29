@@ -1,13 +1,12 @@
 ### Code Book 
 ####Results  
-1. 2015-07-27_AllMethods.csv  
-  2. Contains the search results of 53 methods. The search expressions are documented in the sequence_methods.xls files.  
-  2. 01_csv:  this folder contains search results of each method in a seperate csv file 
-  3. 02_Method_Journal_Distr:  this folder contains jpgs that illustrate for each method the distribution over journal  
-
+1. search_results_combind_date.csv  
+  1. Contains the search results of all 53 methods. 
+  2. Variables are [PMID, Method, Search_Term, Journal, Citations, YearPubmed, Title	Abstract]
+  2. The folder "01_csv" contains for each method the search result. 
+  3. The folder "02_jpg" contain graphics that show the distribution of the methods over the journals
 2. R Scripts
-3. CSV and XLS files
-  4. equencing_methods.csv for determining the search expression
-2. Fnd information on the download in sequencing_methods.xlsx ! 
-3). Use main.R to start downloads
+  3. main.R: reads the "method name" and the "search term" from sequencing_methods.csv and pass it to pubmned.datafetch.R
+  4. pubmed_datafetch.R retrieves the search results from pubmed and store those in csv files 
+  5. combine_datasets.R reads the stored csv files and combines them into one file "search_results_combined_date.csv
 
