@@ -1,8 +1,7 @@
 ### Code Book 
-
-1. Results  
-  1. 2015-07-27_AllMethods.csv  
-  2.   Contains the search results of 53 methods. The search expressions are documented in the sequence_methods.xls files.  
+####Results  
+1. 2015-07-27_AllMethods.csv  
+  2. Contains the search results of 53 methods. The search expressions are documented in the sequence_methods.xls files.  
   2. 01_csv:  this folder contains search results of each method in a seperate csv file 
   3. 02_Method_Journal_Distr:  this folder contains jpgs that illustrate for each method the distribution over journal  
 
