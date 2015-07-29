@@ -1,16 +1,20 @@
-# install.packages('stringr')
+# Combining search results into on file
 
-datacsv<-read.table("SeqMeth_(3C AND chromosome).csv", sep=';')
-data<-read.table("Test_specchar.txt", sep='\t')
+# collecting file and store then in a vector
+files <-list.files('01_csv', pattern='*.csv',full.names=F, recursive=FALSE)
 
-files <-list.files(, pattern='*.csv',full.names=F, recursive=FALSE)
-
-n=0
+# loop over the vector and combine csv files into one file
+mydata<-data.frame()
+print ('start binding') 
 for(i in seq_along(files)){
-    n=n+1
-    print (n)
-    path<-paste('Data_original/csv', files[i], sep='')
-    data<-read.table(path, header=T) # load the file
+    print (paste('binding file', i))
+    path<-paste('01_csv/', files[i], sep='')
+    data<-read.csv(path, header=T) # load the file
     mydata <-rbind(data, mydata)
 }
-    
+print ('end binding file')
+
+#### writing into file
+mydate<-Sys.Date()
+filename= paste("search_results_combined", mydata, '.csv', sep='')
+write.csv(mydata, filename, row.names=FALSE)
