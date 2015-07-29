@@ -1,19 +1,31 @@
-pubmed_search <- function(SearchExpression){
+pubmed_search <- function(SearchExpression, MethodName){
 library(RISmed)
 library(ggplot2)
-print("start Pubmed search")
+library(dplyr)
+print("start PubMed search")
 
 # Search tag: sequencing method
 query <- SearchExpression
-
+MethodName<-MethodName
+#query <- "(PEAT AND (sequence OR sequencing) AND method)"
+#MethodName<-"PEAT"
 
 # Search Pubmed, retrieve complete record, subset record 
-print (paste("start retrieving data:",query))
+print (paste("start retrieving data on: ", MethodName, " search expression: " ,query))
+print (Sys.time())
 ngs_search <- EUtilsSummary(query, type="esearch",db = "pubmed",mindate=2000, maxdate=2015, retmax=30000)
 QueryCount(ngs_search)
+print (paste('query results:', QueryCount(ngs_search)))
 ngs_records <- EUtilsGet(ngs_search)
+print (Sys.time())
+print (paste("ngs record retrieved"))
+print (ngs_records)
+print (Sys.time())
 pubmed_data <- data.frame('PMID'=PMID(ngs_records), 'Citations'=Cited(ngs_records), 'YearPubmed'=YearPubmed(ngs_records), 'Journal'=MedlineTA(ngs_records), 'Title'=ArticleTitle(ngs_records),'Abstract'=AbstractText(ngs_records))
-pubmed_data <- pubmed_data[order(-pubmed_data$YearPubmed, -pubmed_data$Citations),]
+#pubmed_data <- pubmed_data[order(-pubmed_data$YearPubmed, -pubmed_data$Citations),]
+print (Sys.time())
+print (paste("pubmed dataframe generated"))
+pubmed_data <- pubmed_data %>% mutate(Method = MethodName, Search_Term = query) %>% select(PMID, Method, Search_Term, Journal, Citations, YearPubmed, Title, Abstract)  %>% arrange(-YearPubmed, -Citations)
 print (paste("end retrieving data:", query))
 
 
@@ -21,11 +33,12 @@ print (paste("end retrieving data:", query))
 print("Preparing journal graphic")
 years <- YearPubmed(ngs_records)
 ngs_pubs_count <- as.data.frame(table(years))
-print('writing data into txt file')
+print('writing data into csv file')
 
 # Filename for search results, store search results
-filename= paste("SeqMeth_", query, '.txt', sep='')
-write.table(pubmed_data,filename,quote=F,row.names=F, sep='\t')
+filename2= paste(MethodName, '.csv', sep='')
+#write.table(pubmed_data,filename,quote=F,row.names=F, sep='\t')
+write.table(pubmed_data, filename2, row.names=FALSE,sep=";")
 
 # Total publications, no journal differentiation
 total <- NULL
@@ -78,4 +91,10 @@ journalplot= paste("SeqMeth_", query, '_journalplot', '.jpg', sep='')
 ggsave(journalplot, jp)
 print ("end of Pubmed search")
 }
+
+
+
+
+
+
 

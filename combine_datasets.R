@@ -1,18 +1,16 @@
-data<-read.table("Data/SeqMeth_BS-Seq.txt", sep='\t')
+# install.packages('stringr')
 
-files <-list.files(path='DataDev/Data', pattern='*.txt',full.names=F, recursive=FALSE)
-lapply(files, function(){
-    t<-read.table(x, header=T) # load the file
-    # apply function
-    out <-function (t)
-    # write to file
-        write.table (out, "DataDev/", sep='\t', quote=F, row.names=F, col.names=T)
-    
-})
+datacsv<-read.table("SeqMeth_(3C AND chromosome).csv", sep=';')
+data<-read.table("Test_specchar.txt", sep='\t')
 
+files <-list.files(, pattern='*.csv',full.names=F, recursive=FALSE)
 
-lapply(files, function(){
-    a<-cbind(a, )
+n=0
+for(i in seq_along(files)){
+    n=n+1
+    print (n)
+    path<-paste('Data_original/csv', files[i], sep='')
+    data<-read.table(path, header=T) # load the file
+    mydata <-rbind(data, mydata)
 }
-
-rbind(a.txt, b.txt)
+    
