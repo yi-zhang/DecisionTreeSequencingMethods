@@ -16,5 +16,5 @@ print ('end binding file')
 
 #### writing into file
 mydate<-Sys.Date()
-filename= paste("search_results_combined", mydata, '.csv', sep='')
+filename= paste("search_results_combined_", mydate, '.csv', sep='')
 write.csv(mydata, filename, row.names=FALSE)
