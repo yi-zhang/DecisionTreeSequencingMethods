@@ -5,8 +5,8 @@ install.packages("stringr")
 library(data.table)
 library(stringr)
 library(dplyr)
-analyses<-function(file='Analys.csv', expression=''){
-mydata<-read.csv("Analys.csv", header=TRUE)
+analyses<-function(file='analysis.csv', expression=''){
+mydata<-read.csv("analysis.csv", header=TRUE)
 }
 n=0
 jcount1<-data.frame()
