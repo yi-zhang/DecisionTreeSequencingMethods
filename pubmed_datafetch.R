@@ -1,4 +1,4 @@
-pubmed_search <- function(SearchExpression, MethodName){
+pubmed_search <- function(SearchExpression, MethodName, Mnum){
 library(RISmed)
 library(ggplot2)
 library(dplyr)
@@ -6,7 +6,11 @@ library(dplyr)
 # Search tag: sequencing method
 query <- SearchExpression
 MethodName<-MethodName
-print(paste("========>>>>  PubMed search-term: ", query))
+Mnum<-Mnum
+#Mnum<-"19"
+#query<-"RNA-Seq"
+#MethodName<-"RNA-Seq"
+print(paste("========>>>> ID: ", Mnum, "  PubMed search-term: ", query))
 
 # Search Pubmed, retrieve complete record, subset record 
 ngs_search <- EUtilsSummary(query, type="esearch",db = "pubmed",mindate=2000, maxdate=2015, retmax=30000)
@@ -15,7 +19,7 @@ print (paste0(Sys.time(),':   ', QueryCount(ngs_search),' hits'))
 
 ngs_records <- EUtilsGet(ngs_search)
 print (paste0(Sys.time(), ":   ngs record retrieved"))
-pubmed_data <- data.frame('PMID'=PMID(ngs_records), 'Citations'=Cited(ngs_records), 'YearPubmed'=YearPubmed(ngs_records), 'Journal'=MedlineTA(ngs_records), 'Title'=ArticleTitle(ngs_records),'Abstract'=AbstractText(ngs_records))
+pubmed_data <- data.frame('PMID'=PMID(ngs_records), 'Citations'=Cited(ngs_records), 'YearPubmed'=YearPubmed(ngs_records), 'Journal'=Title(ngs_records), 'Title'=ArticleTitle(ngs_records),'Abstract'=AbstractText(ngs_records))
 pubmed_data <- pubmed_data %>% mutate(Method = MethodName, Search_Term = query) %>% select(PMID, Method, Search_Term, Journal, Citations, YearPubmed, Title, Abstract)  %>% arrange(-YearPubmed, -Citations)
 print (paste0(Sys.time(), ":   pubmed dataframe generated"))
 
@@ -25,58 +29,58 @@ ngs_pubs_count <- as.data.frame(table(years))
 print('writing search results into csv file')
 
 # Filename for search results, store search results
-filename2= paste(MethodName, '.csv', sep='')
+filename2= paste("data/",Mnum,"_",MethodName, '.csv', sep='')
 #write.table(pubmed_data,filename,quote=F,row.names=F, sep='\t')
 write.table(pubmed_data, filename2, row.names=FALSE,sep=";")
 
 # Total publications, no journal differentiation
-total <- NULL
-for (i in 2000:2015){
-    peryear <- EUtilsSummary("", type="esearch", db="pubmed", mindate=i, maxdate=i)
-    total[i] <- QueryCount(peryear)
-}
+#total <- NULL
+#for (i in 2000:2015){
+#    peryear <- EUtilsSummary("", type="esearch", db="pubmed", mindate=i, maxdate=i)
+#    total[i] <- QueryCount(peryear)
+#}
 
-year <- 2000:2015
-total_pubs_count<- as.data.frame(cbind(year,total[year]))
-names(total_pubs_count) <- c("year","Total_publications")
-names(ngs_pubs_count) <-  c("year","NGS_publications")
-pubs_year <-  merge(ngs_pubs_count,total_pubs_count,by="year")
+#year <- 2000:2015
+#total_pubs_count<- as.data.frame(cbind(year,total[year]))
+#names(total_pubs_count) <- c("year","Total_publications")
+#names(ngs_pubs_count) <-  c("year","NGS_publications")
+#pubs_year <-  merge(ngs_pubs_count,total_pubs_count,by="year")
 
 # Publications per journal
-journal <- MedlineTA(ngs_records)
-ngs_journal_count <- as.data.frame(table(journal))
+#journal <- MedlineTA(ngs_records)
+#ngs_journal_count <- as.data.frame(table(journal))
 
-a=25
-if (nrow(ngs_journal_count) < 25) {
-    a=nrow(ngs_journal_count)
-    }
+#a=25
+#if (nrow(ngs_journal_count) < 25) {
+#    a=nrow(ngs_journal_count)
+#    }
 
-ngs_journal_count_top25 <- ngs_journal_count[order(-ngs_journal_count[,2]),][1:a,]
-journal_names <- paste(ngs_journal_count_top25$journal,"[jo]",sep="")
+#ngs_journal_count_top25 <- ngs_journal_count[order(-ngs_journal_count[,2]),][1:a,]
+#journal_names <- paste(ngs_journal_count_top25$journal,"[jo]",sep="")
 
-total_journal<-vector(mode="integer", length=25)
-total_journal <- NULL
-for (i in journal_names){
-    perjournal <- EUtilsSummary(i, type='esearch', db='pubmed',mindate=2000, maxdate=2015)
-    total_journal[i] <- QueryCount(perjournal)
-    }
-journal_ngs_total <- cbind(ngs_journal_count_top25,total_journal)
-names(journal_ngs_total) <- c("journal","NGS_publications","Total_publications")
+#total_journal<-vector(mode="integer", length=25)
+#total_journal <- NULL
+#for (i in journal_names){
+#    perjournal <- EUtilsSummary(i, type='esearch', db='pubmed',mindate=2000, maxdate=2015)
+#    total_journal[i] <- QueryCount(perjournal)
+#    }
+#journal_ngs_total <- cbind(ngs_journal_count_top25,total_journal)
+#names(journal_ngs_total) <- c("journal","NGS_publications","Total_publications")
 
-print ("save graphic as jpg")
-xaxes<-paste('publication on', query)
+#print ("save graphic as jpg")
+#xaxes<-paste('publication on', query)
 
 ########  Needs improvement !!! 
-write.table(journal_ngs_total,"NGS_publications_per_journal.txt",quote=F,sep="\t",row.names=F)
-pubs_per_journal <- read.table("NGS_publications_per_journal.txt",header = T,sep="\t")
-jp<-ggplot(pubs_per_journal,aes(journal, NGS_publications, fill=journal)) + geom_bar(stat="identity")+
-    coord_flip()+
-    theme(legend.position="none")
+#write.table(journal_ngs_total,"NGS_publications_per_journal.txt",quote=F,sep="\t",row.names=F)
+#pubs_per_journal <- read.table("NGS_publications_per_journal.txt",header = T,sep="\t")
+#jp<-ggplot(pubs_per_journal,aes(journal, NGS_publications, fill=journal)) + geom_bar(stat="identity")+
+    #coord_flip()+
+    #theme(legend.position="none")
 
 
 # Save plot
-journalplot= paste("SeqMeth_", query, '_journalplot', '.jpg', sep='')
-ggsave(journalplot, jp)
+#journalplot= paste("SeqMeth_", query, '_journalplot', '.jpg', sep='')
+#ggsave(journalplot, jp)
 print ("end of Pubmed search")
 }
 
