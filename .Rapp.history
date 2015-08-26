@@ -2,3 +2,7 @@ getwd()
 read.table("SeqMeth_")
 mydata<-read.csv2("SeqMeth_ATAC-Seq.csv")
 mydata
+upate
+update
+update(R)
+y
